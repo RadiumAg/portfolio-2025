@@ -5,18 +5,18 @@ export default [
     title: "AIGate",
     slug: "aigate",
     visualLabel: "01",
-    description: "Self-hostable AI gateway and quota control",
+    description: "可私有部署的 AI 网关与用量控制平台",
   },
   {
-    title: "Bilibili Favorites",
+    title: "B站收藏夹整理工具",
     slug: "bilibili-favorites",
     visualLabel: "02",
-    description: "AI-assisted Chrome extension for Bilibili collections",
+    description: "用 AI 辅助整理 B 站收藏的 Chrome 扩展",
   },
   {
     title: "js-screenshot",
     slug: "js-screenshot",
     visualLabel: "03",
-    description: "Framework-agnostic screenshot and annotation SDK",
+    description: "框架无关的截图与标注 SDK",
   },
 ] as const satisfies ProjectPreview[];

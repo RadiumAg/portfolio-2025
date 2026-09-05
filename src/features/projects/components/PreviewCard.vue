@@ -14,7 +14,7 @@ import type { ProjectPreview } from "../../../content/types";
 
 const tlRef = ref<gsap.core.Timeline | null>(null);
 const wrapperRef = ref<HTMLDivElement | null>(null);
-const imageRef = ref<HTMLImageElement | null>(null);
+const imageRef = ref<HTMLElement | null>(null);
 
 const props = defineProps<{
   preview?: ProjectPreview;
@@ -57,8 +57,17 @@ onUnmounted(() => {
   >
     <div class="preview-card-top" ref="wrapperRef">
       <div class="preview-card-image-wrapper">
-        <div class="preview-card-image-container">
+        <div v-if="props.preview.thumbnail" class="preview-card-image-container">
           <img :src="props.preview.thumbnail" :alt="props.preview.title" class="preview-card-image" ref="imageRef" />
+        </div>
+        <div
+          v-else
+          ref="imageRef"
+          :class="['preview-card-visual', `preview-card-visual-${props.preview.slug}`]"
+          aria-hidden="true"
+        >
+          <span class="preview-card-visual-label">{{ props.preview.visualLabel ?? "" }}</span>
+          <span class="preview-card-visual-title">{{ props.preview.title }}</span>
         </div>
       </div>
       <div class="preview-card-overlay">
@@ -196,6 +205,74 @@ onUnmounted(() => {
       border-radius: var(--radius-lg);
       overflow: hidden;
       background-color: var(--color-beige-500);
+    }
+  }
+
+  &-visual {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: var(--space-lg);
+    color: var(--color-white-400);
+    background: linear-gradient(135deg, #102033, #275b88);
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+    }
+
+    &::before {
+      width: 62%;
+      aspect-ratio: 1;
+      right: -18%;
+      top: -38%;
+    }
+
+    &::after {
+      width: 34%;
+      aspect-ratio: 1;
+      left: -8%;
+      bottom: -32%;
+    }
+
+    &-aigate {
+      background: linear-gradient(135deg, #15152b, #583e9b);
+    }
+
+    &-bilibili-favorites {
+      background: linear-gradient(135deg, #004d76, #00a5d5);
+    }
+
+    &-js-screenshot {
+      background: linear-gradient(135deg, #152021, #3c726a);
+    }
+
+    &-label,
+    &-title {
+      position: relative;
+      z-index: 1;
+      font-family: "ProFontWindows";
+    }
+
+    &-label {
+      font-size: var(--font-size-title-md);
+      font-weight: 700;
+    }
+
+    &-title {
+      max-width: 60%;
+      font-size: var(--font-size-md);
+      text-align: right;
+      font-weight: 700;
     }
   }
 

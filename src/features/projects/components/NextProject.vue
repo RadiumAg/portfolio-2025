@@ -11,7 +11,8 @@ const { project } = defineProps<{
 
 <template>
   <div class="next-project children-unclickable" data-hoversound="hover">
-    <img :src="project.thumbnail" :alt="project.title" class="next-project-image" />
+    <img v-if="project.thumbnail" :src="project.thumbnail" :alt="project.title" class="next-project-image" />
+    <span v-else class="next-project-visual" aria-hidden="true">{{ project.visualLabel ?? "" }}</span>
     <div class="next-project-content">
       <p class="next-project-prefix">{{ t("next-project") }}:</p>
       <h3 class="next-project-title">{{ project.title }}</h3>
@@ -89,6 +90,21 @@ const { project } = defineProps<{
     border-radius: var(--radius-sm);
     max-height: 100%;
     width: auto;
+  }
+
+  &-visual {
+    align-items: center;
+    background: var(--color-text-400);
+    border-radius: var(--radius-sm);
+    color: var(--color-background-300);
+    display: flex;
+    flex: 0 0 auto;
+    font-family: "ProFontWindows";
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    height: 100%;
+    justify-content: center;
+    width: 20%;
   }
 
   @include mixins.hover {
