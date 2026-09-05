@@ -7,6 +7,7 @@ export type TagVariant =
   | "html"
   | "css"
   | "javascript"
+  | "typescript"
   | "node"
   | "next"
   | "kubernetes"
@@ -23,6 +24,7 @@ export const tagLabels = {
   html: "HTML",
   css: "CSS",
   javascript: "JavaScript",
+  typescript: "TypeScript",
   node: "Node.js",
   next: "Next.js",
   kubernetes: "Kubernetes",
