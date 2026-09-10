@@ -106,25 +106,26 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
   timelines.value = updatedTimelines;
 };
 
+type ServiceGroup = {
+  category: string;
+  technologies: string;
+};
+
 const SERVICES_EN = [
-  { name: "Three.js & WebGL" },
-  { name: "Node.js & WebSockets" },
-  { name: "React & Vue" },
-  { name: "Kubernetes & Redis" },
-  { name: "Real-time Multiplayer" },
-] as const satisfies { name: string }[];
+  { category: "Frontend", technologies: "React · Vue · TypeScript · Three.js / WebGL" },
+  { category: "Backend", technologies: "Java · Spring Boot · Node.js · MySQL" },
+  { category: "Platform", technologies: "Docker · Kubernetes · Redis" },
+  { category: "Specialty", technologies: "Real-time multiplayer · WebSockets" },
+] as const satisfies ServiceGroup[];
 
-const SERVICES_DE = [
-  { name: "Three.js & WebGL" },
-  { name: "Node.js & WebSockets" },
-  { name: "React & Vue" },
-  { name: "Kubernetes & Redis" },
-  { name: "Echtzeit-Mehrspieler" },
-] as const satisfies { name: string }[];
+const SERVICES_ZH = [
+  { category: "前端", technologies: "React · Vue · TypeScript · Three.js / WebGL" },
+  { category: "后端", technologies: "Java · Spring Boot · Node.js · MySQL" },
+  { category: "工程化", technologies: "Docker · Kubernetes · Redis" },
+  { category: "专长", technologies: "实时多人游戏 · WebSockets" },
+] as const satisfies ServiceGroup[];
 
-const services = computed(() => {
-  return locale.value === "en" ? SERVICES_EN : SERVICES_DE;
-});
+const services = computed(() => (locale.value === "en" ? SERVICES_EN : SERVICES_ZH));
 </script>
 
 <template>
@@ -139,18 +140,19 @@ const services = computed(() => {
             @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0)"
           />
         </div>
-        <div class="box-services-list">
-          <div class="box-services-list-item" v-for="(service, index) in services" :key="service.name">
-            <p class="box-services-list-item-name">
+        <ul class="box-services-list">
+          <li class="box-services-list-item" v-for="(service, index) in services" :key="service.category">
+            <span class="box-services-list-item-category">{{ service.category }}</span>
+            <div class="box-services-list-item-name">
               <AppearingText
-                :text="service.name"
+                :text="service.technologies"
                 :steps="1"
                 :duration="0.35"
                 @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.15 + index * 0.1)"
               />
-            </p>
-          </div>
-        </div>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   </ProjectedElement>
@@ -238,22 +240,21 @@ const services = computed(() => {
     display: flex;
     flex-direction: column;
     gap: var(--space-xs);
+    list-style: none;
+    margin: 0;
+    padding: 0;
 
     &-item {
-      display: flex;
-      flex-direction: column;
-      padding-left: 18px;
-      position: relative;
+      display: grid;
+      grid-template-columns: 64px minmax(0, 1fr);
+      align-items: baseline;
+      column-gap: var(--space-xs);
 
-      &::before {
-        content: "";
-        position: absolute;
-        left: 2px;
-        top: 6px;
-        width: 4px;
-        height: 4px;
-        background-color: var(--color-text-cyan-400);
-        border-radius: 50%;
+      &-category {
+        color: var(--color-text-400);
+        font-size: var(--font-size-xs);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
       }
 
       &-name {

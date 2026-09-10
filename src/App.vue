@@ -4,7 +4,7 @@ import { useTranslations } from "./i18n/composables/useTranslations";
 import { usePreloader } from "./composables/usePreloader";
 import Cursor from "./components/Cursor.vue";
 import { useAgent } from "./composables/useAgent";
-import { useMusic } from "./features/sounds/composables/useMusic";
+// import { useMusic } from "./features/sounds/composables/useMusic";
 import { useHowler } from "./features/sounds/composables/useHowler";
 import { useRouteObserver } from "./composables/useRouteObserver";
 import Home from "./features/home/components/Home.vue";
@@ -20,7 +20,7 @@ const { isTransitioning } = useProjectTransition();
 
 useTranslations();
 usePreloader();
-useMusic();
+// useMusic();
 useHowler();
 useScroll();
 useRouteObserver();
