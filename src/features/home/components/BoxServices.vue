@@ -251,7 +251,7 @@ const services = computed(() => (locale.value === "en" ? SERVICES_EN : SERVICES_
       column-gap: var(--space-xs);
 
       &-category {
-        color: var(--color-text-400);
+        color: var(--color-text-cyan-300);
         font-size: var(--font-size-xs);
         letter-spacing: 0.08em;
         text-transform: uppercase;

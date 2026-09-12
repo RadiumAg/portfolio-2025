@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import Social from "./Social.vue";
-import Link from "./Link.vue";
-import Clickable from "./Clickable.vue";
+// import Link from "./Link.vue";
+// import Clickable from "./Clickable.vue";
 import LangSwitch from "./LangSwitch.vue";
 import NotchSection from "./NotchSection.vue";
-import { t } from "../i18n/utils/translate";
+// import { t } from "../i18n/utils/translate";
 import ButtonRound from "./ButtonRound.vue";
 import { lenis } from "../composables/useScroll";
 import ArrowRightLong from "./icons/ArrowRightLong.vue";
-import { profile } from "../content/profile";
+// import { profile } from "../content/profile";
 
 interface Props {
   withSocial?: boolean;
@@ -20,7 +20,7 @@ const handleBackToTop = () => {
 };
 
 const { withSocial = true } = defineProps<Props>();
-const showAttribution = import.meta.env.VITE_SHOW_ATTRIBUTION !== "false";
+// const showAttribution = import.meta.env.VITE_SHOW_ATTRIBUTION !== "false";
 </script>
 
 <template>
@@ -45,6 +45,7 @@ const showAttribution = import.meta.env.VITE_SHOW_ATTRIBUTION !== "false";
           <LangSwitch />
         </div>
       </div>
+      <!--
       <div class="footer-credits">
         <div v-if="showAttribution" class="footer-credits-built">
           <p>
@@ -78,6 +79,7 @@ const showAttribution = import.meta.env.VITE_SHOW_ATTRIBUTION !== "false";
         </div>
         <p>© {{ new Date().getFullYear() }} {{ profile.name }}</p>
       </div>
+      -->
     </div>
   </footer>
 </template>

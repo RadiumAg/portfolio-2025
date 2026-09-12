@@ -55,13 +55,8 @@ watchEffect((onInvalidate) => {
   <div ref="bannerRef" class="banner" :class="`banner-size-${resolvedSize}`">
     <div ref="backgroundRef" class="banner-background"></div>
     <div class="banner-copy" :class="`banner-copy-size-${resolvedSize}`">
-      <AppearingText
-        :text="props.copy"
-        :steps="2"
-        :duration="DURATION"
-        @timeline:created="handleTimelineCreated"
-        v-if="props.animated"
-      />
+      <AppearingText :text="props.copy" :steps="2" :duration="DURATION" @timeline:created="handleTimelineCreated"
+        v-if="props.animated" />
       <p class="banner-copy-value" v-else>{{ props.copy }}</p>
     </div>
   </div>
